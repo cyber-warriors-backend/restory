@@ -1,3 +1,9 @@
+server:
+  port: 80
+  servlet:
+    encoding:
+      force-response: true
+
 spring:
   application:
     name: restory
@@ -6,21 +12,9 @@ spring:
   jpa:
     properties:
       hibernate:
-        #show_sql: true
         format_sql: true
         use_sql_comments: true
         default_batch_fetch_size: 100
-    open-in-view: false
-
-server:
-  port: 80
-  servlet:
-    encoding:
-      force-response: true
-
-logging:
-  level:
-    org.hibernate.SQL: debug
-    org.hibernate.type: trace
+    open-in-view: true
 
 
