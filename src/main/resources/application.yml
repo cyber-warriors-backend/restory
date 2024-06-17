@@ -2,7 +2,7 @@ spring:
   application:
     name: restory
   profiles:
-    active: ${profile}
+    active: ${profile:prod}
   jpa:
     properties:
       hibernate:
