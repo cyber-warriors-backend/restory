@@ -1,3 +1,9 @@
+server:
+  port: 80
+  servlet:
+    encoding:
+      force-response: true
+
 spring:
   h2:
     console:
@@ -16,9 +22,3 @@ logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.orm.jdbc.bind: trace
-
-server:
-  port: 80
-  servlet:
-    encoding:
-      force-response: true
