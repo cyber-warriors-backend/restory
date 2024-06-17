@@ -1,7 +1,10 @@
+server:
+  port: 80
+  servlet:
+    encoding:
+      force-response: true
+
 spring:
-  config:
-    activate:
-      on-profile: dev
   datasource:
     url: jdbc:mariadb://${DEV_DB_ENDPOINT}:3306/${DEV_DB_NAME}
     username: ${DEV_DB_USERNAME}
@@ -9,15 +12,9 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
 
 logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.orm.jdbc.bind: trace
-
-server:
-  port: 80
-  servlet:
-    encoding:
-      force-response: true
