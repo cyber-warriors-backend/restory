@@ -1,10 +1,7 @@
-server:
-  port: 80
-  servlet:
-    encoding:
-      force-response: true
-
 spring:
+  config:
+    activate:
+      on-profile: local
   h2:
     console:
       enabled: true
@@ -13,7 +10,7 @@ spring:
     url: ${LOCAL_DB_URL}
     username: ${LOCAL_DB_USERNAME}
     password: ${LOCAL_DB_PASSWORD}
-    driver-class-name: org.h2.Driver
+    driver-class-name: ${LOCAL_DB_DRIVER}
   jpa:
     hibernate:
       ddl-auto: create
@@ -22,3 +19,9 @@ logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.orm.jdbc.bind: trace
+
+server:
+  port: 80
+  servlet:
+    encoding:
+      force-response: true

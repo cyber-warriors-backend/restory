@@ -1,7 +1,7 @@
-server:
-  port: 443
-
 spring:
+  config:
+    activate:
+      on-profile: prod
   datasource:
     url: jdbc:mariadb://${PROD_DB_ENDPOINT}:3306/${PROD_DB_NAME}
     username: ${PROD_DB_USERNAME}
@@ -21,5 +21,8 @@ springdoc:
     enabled: false
   swagger-ui:
     enabled: false
+
+server:
+  port: 443
 
 
