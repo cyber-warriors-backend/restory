@@ -1,7 +1,4 @@
 spring:
-  config:
-    activate:
-      on-profile: prod
   datasource:
     url: jdbc:mariadb://${PROD_DB_ENDPOINT}:3306/${PROD_DB_NAME}
     username: ${PROD_DB_USERNAME}
@@ -9,7 +6,7 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
 
 logging:
   level:
