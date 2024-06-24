@@ -27,5 +27,5 @@ public class AppRunnerTest implements ApplicationRunner {
         System.out.println("Common Property : " + environment.getProperty("common.string"));
         System.out.println("====================================================");
     }
-
+// asdf
 }
