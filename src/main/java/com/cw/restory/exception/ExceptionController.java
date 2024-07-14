@@ -1,6 +1,5 @@
-package com.cw.restory.web.exception.controller;
+package com.cw.restory.exception;
 
-import com.cw.restory.web.exception.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -24,11 +23,25 @@ public class ExceptionController {
 
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .code(HttpStatus.BAD_REQUEST.value())
+                .message("잘못된 요청입니다.")
                 .validation(validation)
                 .build();
 
         return ResponseEntity
                 .badRequest()
+                .body(errorResponse);
+    }
+
+    @ExceptionHandler(ApiException.class)
+    public ResponseEntity<ErrorResponse> exception(ApiException e){
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .code(e.getStatusCode())
+                .message(e.getMessage())
+                .build();
+
+        return ResponseEntity
+                .status(e.getStatusCode())
                 .body(errorResponse);
     }
 }
