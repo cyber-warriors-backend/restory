@@ -1,4 +1,4 @@
-package com.cw.restory.domain.sample.service;
+package com.cw.restory.service.sample;
 
 import com.cw.restory.domain.sample.entity.Sample;
 import com.cw.restory.domain.sample.repository.SampleRepository;
