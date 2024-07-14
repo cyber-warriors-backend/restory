@@ -1,6 +1,6 @@
 package com.cw.restory.web.sample.controller;
 
-import com.cw.restory.domain.sample.service.SampleService;
+import com.cw.restory.service.sample.SampleService;
 import com.cw.restory.web.sample.request.SampleAddRequest;
 import com.cw.restory.web.sample.response.SampleAddResponse;
 import io.swagger.v3.oas.annotations.Operation;
