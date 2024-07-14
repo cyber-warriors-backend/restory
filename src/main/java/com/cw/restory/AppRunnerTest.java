@@ -23,6 +23,7 @@ public class AppRunnerTest implements ApplicationRunner {
         System.out.println("Datasource url : " + environment.getProperty("spring.datasource.url"));
         System.out.println("Datasource username : " + environment.getProperty("spring.datasource.username"));
         System.out.println("Server Port : " + environment.getProperty("server.port"));
+        System.out.println("Server url : " + environment.getProperty("server.url"));
         System.out.println("Default Property : " + environment.getProperty("default.string"));
         System.out.println("Common Property : " + environment.getProperty("common.string"));
         System.out.println("====================================================");
