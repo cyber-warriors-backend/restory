@@ -20,6 +20,7 @@ spring:
     open-in-view: true
 
 server:
+  url: "http://localhost"
   servlet:
     encoding:
       force-response: true

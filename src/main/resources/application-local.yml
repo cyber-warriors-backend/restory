@@ -4,6 +4,9 @@ server:
   servlet:
     encoding:
       force-response: true
+    session:
+      cookie:
+        secure: false
 
 spring:
   h2:
@@ -18,6 +21,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+  session:
+    jdbc:
+      initialize-schema: always
 
 logging:
   level:
