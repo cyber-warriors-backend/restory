@@ -1,5 +1,6 @@
 package com.cw.restory.exception;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
+@Slf4j
 public class ExceptionController {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> validException(MethodArgumentNotValidException e){
@@ -42,6 +44,21 @@ public class ExceptionController {
 
         return ResponseEntity
                 .status(e.getStatusCode())
+                .body(errorResponse);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> defaultException(Exception e){
+
+        log.error("Exception : ", e);
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .message("관리자에게 문의해주세요.")
+                .build();
+
+        return ResponseEntity
+                .internalServerError()
                 .body(errorResponse);
     }
 }
