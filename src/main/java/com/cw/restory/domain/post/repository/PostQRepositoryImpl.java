@@ -22,6 +22,7 @@ public class PostQRepositoryImpl implements PostQRepository{
     public List<Post> findAllByFilters(PostGetRequest postGetRequest) {
         return jpaQueryFactory
                 .selectFrom(post)
+                .distinct()
                 .leftJoin(post.postImages, postImage).fetchJoin()
                 .where(findByCity(postGetRequest.city()), findByType(postGetRequest.type()), post.copyright.eq(true))
                 .offset(postGetRequest.offset())
