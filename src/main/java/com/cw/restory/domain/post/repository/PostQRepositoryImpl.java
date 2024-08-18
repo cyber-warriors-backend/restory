@@ -12,7 +12,6 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 import static com.cw.restory.domain.post.entity.QPost.post;
-import static com.cw.restory.domain.post.entity.QPostImage.postImage;
 
 @RequiredArgsConstructor
 public class PostQRepositoryImpl implements PostQRepository{
@@ -22,8 +21,6 @@ public class PostQRepositoryImpl implements PostQRepository{
     public List<Post> findAllByFilters(PostGetRequest postGetRequest) {
         return jpaQueryFactory
                 .selectFrom(post)
-                .distinct()
-                .leftJoin(post.postImages, postImage).fetchJoin()
                 .where(findByCity(postGetRequest.city()), findByType(postGetRequest.type()), post.copyright.eq(true))
                 .offset(postGetRequest.offset())
                 .limit(postGetRequest.size())

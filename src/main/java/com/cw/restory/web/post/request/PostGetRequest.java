@@ -1,9 +1,7 @@
 package com.cw.restory.web.post.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 import lombok.Builder;
 
 @Schema(title = "게시글 목록 조회 요청 DTO")
@@ -21,15 +19,29 @@ public record PostGetRequest(
         @Schema(description = "지역 필터로 검색 시 사용할 지역 코드", example = "SEOUL")
         String city,
         @Schema(description = "타입 필터로 검색 시 사용할 타입 코드", example = "CAFE")
-        String type
+        String type,
+        @Schema(description = "거리순 정렬에 필요한 위도 값", example = "36.000000")
+        @DecimalMin(value = "-90.0", inclusive = true, message = "-90.0 ~ 90.0 사이의 값을 입력해 주세요.")
+        @DecimalMax(value = "90.0", inclusive = true, message = "-90.0 ~ 90.0 사이의 값을 입력해 주세요.")
+        Double latitude,
+        @Schema(description = "거리순 정렬에 필요한 경도 값", example = "36.000000")
+        @DecimalMin(value = "-180.0", inclusive = true, message = "-180.0 ~ 180.0 사이의 값을 입력해 주세요.")
+        @DecimalMax(value = "180.0", inclusive = true, message = "-180.0 ~ 180.0 사이의 값을 입력해 주세요.")
+        Double longitude,
+        @Schema(description = "메인에 표시할 에디터픽에 해당하는 게시글인지 여부", example = "false")
+        Boolean isEditorPick
+
 )
 {
     @Builder
-    public PostGetRequest(Integer size, Integer page, String city, String type) {
+    public PostGetRequest(Integer size, Integer page, String city, String type, Double latitude, Double longitude, Boolean isEditorPick) {
         this.size = (size == null) || (size < 1) ? 10 : size;
         this.page = (page == null) || (page < 1) ? 1 : page;
         this.city = city == null ? "" : city;
         this.type = type == null ? "" : type;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.isEditorPick = isEditorPick;
     }
 
     public Integer offset(){

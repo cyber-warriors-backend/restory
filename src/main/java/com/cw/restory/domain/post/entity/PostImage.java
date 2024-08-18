@@ -2,6 +2,7 @@ package com.cw.restory.domain.post.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,4 +17,11 @@ public class PostImage {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Post post;
+
+    @Builder
+    public PostImage(String imageUrl, String description, Post post) {
+        this.imageUrl = imageUrl;
+        this.description = description;
+        this.post = post;
+    }
 }

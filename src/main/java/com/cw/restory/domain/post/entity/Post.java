@@ -4,8 +4,10 @@ import com.cw.restory.domain.post.enums.City;
 import com.cw.restory.domain.post.enums.Type;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.List;
 
@@ -59,6 +61,29 @@ public class Post{
 
     private String url;
 
+    private Boolean isEditorPick;
+
     @OneToMany(mappedBy = "post")
+    @BatchSize(size = 150)
     private List<PostImage> postImages;
+
+    @Builder
+    public Post(String title, Type type, String summary, String content, String subContent, City city, String address, Double latitude, Double longitude, String remark, Boolean copyright, String telephone, String duration, String holiday, String url, Boolean isEditorPick) {
+        this.title = title;
+        this.type = type;
+        this.summary = summary;
+        this.content = content;
+        this.subContent = subContent;
+        this.city = city;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.remark = remark;
+        this.copyright = copyright;
+        this.telephone = telephone;
+        this.duration = duration;
+        this.holiday = holiday;
+        this.url = url;
+        this.isEditorPick = isEditorPick;
+    }
 }
