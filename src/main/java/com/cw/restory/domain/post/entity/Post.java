@@ -51,13 +51,10 @@ public class Post{
 
     private Boolean copyright;
 
-    @Column(length = 20)
     private String telephone;
 
-    @Column(length = 50)
     private String duration;
 
-    @Column(length = 50)
     private String holiday;
 
     private String url;
