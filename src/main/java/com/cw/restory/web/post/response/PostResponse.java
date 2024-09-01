@@ -8,7 +8,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-@Schema(title = "게시글 목록 조회 응답 DTO")
+@Schema(title = "게시글 조회 응답 DTO")
 public class PostResponse{
     private final Long id;
     private final String title;

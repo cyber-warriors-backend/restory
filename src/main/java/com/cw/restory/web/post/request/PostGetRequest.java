@@ -8,7 +8,7 @@ import lombok.Builder;
 public record PostGetRequest(
         @Schema(description = "페이지당 보여줄 데이터 개수", example = "10", defaultValue = "10")
         @Min(value = 1, message = "최솟값은 1입니다.")
-        @Max(value = 1000, message = "최댓값은 1입니다.")
+        @Max(value = 1000, message = "최댓값은 1000입니다.")
         @Positive(message = "양수만 가능합니다.")
         Integer size,
         @Schema(description = "해당 페이지 번호", example = "1", defaultValue = "1")
