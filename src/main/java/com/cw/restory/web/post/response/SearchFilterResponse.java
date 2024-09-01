@@ -1,12 +1,11 @@
 package com.cw.restory.web.post.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@Schema(title = "게시글 검색 필터 조회 웅덥 DTO")
+//@Schema(title = "게시글 검색 필터 조회 웅답 DTO")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class SearchFilterResponse{
     private final String code;

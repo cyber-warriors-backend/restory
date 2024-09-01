@@ -28,7 +28,7 @@ public record PostGetRequest(
         @DecimalMin(value = "-180.0", inclusive = true, message = "-180.0 ~ 180.0 사이의 값을 입력해 주세요.")
         @DecimalMax(value = "180.0", inclusive = true, message = "-180.0 ~ 180.0 사이의 값을 입력해 주세요.")
         Double longitude,
-        @Schema(description = "메인에 표시할 에디터픽에 해당하는 게시글인지 여부", example = "false")
+        @Schema(description = "메인에 표시할 에디터픽에 해당하는 게시글인지 여부(에디터픽이면 true)", example = "false", defaultValue = "false")
         Boolean isEditorPick
 
 )
