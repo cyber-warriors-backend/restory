@@ -4,6 +4,7 @@ import com.cw.restory.domain.post.entity.Post;
 import com.cw.restory.domain.post.enums.City;
 import com.cw.restory.domain.post.enums.Type;
 import com.cw.restory.web.post.request.PostGetRequest;
+import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,15 @@ import static com.cw.restory.domain.post.entity.QPost.post;
 @RequiredArgsConstructor
 public class PostQRepositoryImpl implements PostQRepository{
     private final JPAQueryFactory jpaQueryFactory;
+
+    @Override
+    public List<Tuple> findCountByCityFilters() {
+        return jpaQueryFactory
+                .select(post.city, post.city.count().as("cnt"))
+                .from(post)
+                .groupBy(post.city)
+                .fetch();
+    }
 
     @Override
     public List<Post> findAllByFilters(PostGetRequest postGetRequest) {
