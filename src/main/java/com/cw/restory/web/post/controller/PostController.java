@@ -32,4 +32,10 @@ public class PostController {
     public ResponseEntity<PostResponse> getPostOne(@PathVariable Long id){
         return ResponseEntity.ok().body(postService.getPostOne(id));
     }
+
+//    @Operation(summary = "게시글 목록 조회 By 추천검색어", description = "추천검색어를 태그로 갖고있는 모든 게시글을 조회합니다.")
+//    @GetMapping
+//    public ResponseEntity<CommonListResponse<PostResponse>> getPostAll(@Validated PostGetRequest postRequest){
+//        return ResponseEntity.ok().body(postService.getPostAll(postRequest));
+//    }
 }

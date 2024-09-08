@@ -1,4 +1,4 @@
-package com.cw.restory.domain.post.entity;
+package com.cw.restory.domain.tag;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -15,8 +15,6 @@ public class Tag {
 
     @Column(nullable = false, length = 50)
     private String name;
-
-    private Integer recommendOrder;
 
     private Integer searchCnt;
 }
