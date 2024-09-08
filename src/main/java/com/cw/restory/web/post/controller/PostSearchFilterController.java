@@ -4,7 +4,7 @@ import com.cw.restory.domain.post.entity.QPost;
 import com.cw.restory.domain.post.enums.City;
 import com.cw.restory.domain.post.enums.Type;
 import com.cw.restory.domain.post.repository.PostRepository;
-import com.cw.restory.web.post.response.SearchFilterResponse;
+import com.cw.restory.web.post.response.PostSearchFilterResponse;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.Expressions;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,7 +30,7 @@ public class PostSearchFilterController {
 
     @Operation(summary = "도시", description = "도시 필터 목록과 도시별 데이터 갯수를 조회합니다.")
     @GetMapping("/city")
-    public ResponseEntity<List<SearchFilterResponse>> getCityFilters(){
+    public ResponseEntity<List<PostSearchFilterResponse>> getCityFilters(){
 
         List<Tuple> countByCityFilters = postRepository.findCountByCityFilters();
 
@@ -40,11 +40,11 @@ public class PostSearchFilterController {
                         tuple -> tuple.get(Expressions.numberPath(Long.class, "cnt"))
                 ));
 
-        List<SearchFilterResponse> filters = Arrays.stream(City.values())
+        List<PostSearchFilterResponse> filters = Arrays.stream(City.values())
                 .map(e -> {
                     Long cnt = cityCountMap.getOrDefault(e.name(), 0L);
 
-                    return SearchFilterResponse.builder()
+                    return PostSearchFilterResponse.builder()
                             .code(e.name())
                             .description(e.getDescription())
                             .cnt(cnt) // cnt 추가
@@ -58,9 +58,9 @@ public class PostSearchFilterController {
 
     @Operation(summary = "게시글 타입", description = "게시글 타입 필터 목록을 조회합니다.")
     @GetMapping("/type")
-    public ResponseEntity<List<SearchFilterResponse>> getTypeFilters(){
-        List<SearchFilterResponse> filters = Arrays.stream(Type.values())
-                .map(e -> SearchFilterResponse.builder()
+    public ResponseEntity<List<PostSearchFilterResponse>> getTypeFilters(){
+        List<PostSearchFilterResponse> filters = Arrays.stream(Type.values())
+                .map(e -> PostSearchFilterResponse.builder()
                             .code(e.name())
                             .description(e.getDescription())
                             .build()
