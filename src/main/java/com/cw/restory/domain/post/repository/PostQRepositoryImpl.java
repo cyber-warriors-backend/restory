@@ -13,6 +13,9 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 import static com.cw.restory.domain.post.entity.QPost.post;
+import static com.cw.restory.domain.post.entity.QPostTag.postTag;
+import static com.cw.restory.domain.post.entity.QTag.tag;
+import static com.querydsl.jpa.JPAExpressions.select;
 
 @RequiredArgsConstructor
 public class PostQRepositoryImpl implements PostQRepository{
@@ -31,7 +34,12 @@ public class PostQRepositoryImpl implements PostQRepository{
     public List<Post> findAllByFilters(PostGetRequest postGetRequest) {
         return jpaQueryFactory
                 .selectFrom(post)
-                .where(findByCity(postGetRequest.city()), findByType(postGetRequest.type()), post.copyright.eq(true))
+                .where(
+                        findByCity(postGetRequest.city()),
+                        findByType(postGetRequest.type()),
+                        post.copyright.eq(true),
+                        findByDescription(postGetRequest.description())
+                )
                 .offset(postGetRequest.offset())
                 .limit(postGetRequest.size())
                 .fetch();
@@ -44,5 +52,15 @@ public class PostQRepositoryImpl implements PostQRepository{
 
     private BooleanExpression findByType(String type) {
         return StringUtils.hasText(type) ? post.type.eq(Type.valueOf(type)) : null;
+    }
+    private BooleanExpression findByDescription(String description) {
+        return StringUtils.hasText(description) ?
+                post.title.contains(description)
+                .or(post.address.contains(description))
+                .or(post.id.in(
+                        select(postTag.post.id)
+                        .from(postTag).join(postTag.tag, tag)
+                        .where(tag.name.contains(description))
+                )) : null;
     }
 }
