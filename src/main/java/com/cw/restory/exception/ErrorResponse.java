@@ -1,4 +1,4 @@
-package com.cw.restory.web.exception.response;
+package com.cw.restory.exception;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;

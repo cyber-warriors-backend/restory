@@ -1,4 +1,5 @@
 server:
+  url: "https://api.restory.site"
   port: 8080
 
 spring:
