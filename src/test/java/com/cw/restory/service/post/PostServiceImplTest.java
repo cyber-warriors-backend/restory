@@ -78,4 +78,39 @@ class PostServiceImplTest {
         assertThat(postAll.count()).isEqualTo(10);
         assertThat(postAll.data().get(0).getPostImages().size()).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("게시글 1개를 조회한다.")
+    void getPostOne() {
+        //given
+        Post post = Post.builder()
+                .title(1 + "번 게시글 제목")
+                .type(Type.CAFE)
+                .content(1 + "번 게시글 콘텐트")
+                .latitude(36.0)
+                .longitude(36.0)
+                .address("주소")
+                .city(City.SEOUL)
+                .copyright(true)
+                .build();
+        postRepository.save(post);
+
+        List<PostImage> postImageList = IntStream.range(0, 3)
+                .mapToObj(i -> PostImage.builder()
+                        .imageUrl((i+1) + "번 이미지 url")
+                        .description((i+1) + "번 이미지 설명")
+                        .post(post)
+                        .build()).toList();
+        postImageRepository.saveAll(postImageList);
+
+        em.clear();
+
+        //when
+        PostResponse postOne = postService.getPostOne(post.getId());
+
+        //then
+        assertThat(postOne.getId()).isEqualTo(post.getId());
+    }
+
+
 }
