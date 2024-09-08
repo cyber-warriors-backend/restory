@@ -32,8 +32,13 @@ public class PostServiceImpl implements PostService{
     @Override
     public PostResponse getPostOne(Long id) {
         Post post = postRepository.findById(id).orElseThrow(PostNotFound::new);
+
+        post.formatContent(post.getFormatText(post.getContent()));
+        post.formatSubContent(post.getFormatText(post.getSubContent()));
+
         return PostResponse.builder()
                 .post(post)
                 .build();
     }
+
 }
