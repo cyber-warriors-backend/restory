@@ -28,17 +28,19 @@ public record PostGetRequest(
         @DecimalMin(value = "-180.0", inclusive = true, message = "-180.0 ~ 180.0 사이의 값을 입력해 주세요.")
         @DecimalMax(value = "180.0", inclusive = true, message = "-180.0 ~ 180.0 사이의 값을 입력해 주세요.")
         Double longitude,
-
         @Schema(description = "검색어", example = "아트밸리")
         @Size(max = 1000, message = "1000자를 넘을 수 없습니다.")
         String description,
+        @Schema(description = "태그 아이디(추천 검색어)", example = "9")
+        @Positive(message = "양수만 가능합니다.")
+        Long tagId,
         @Schema(description = "메인에 표시할 에디터픽에 해당하는 게시글인지 여부(에디터픽이면 true)", example = "false", defaultValue = "false")
         Boolean isEditorPick
 
 )
 {
     @Builder
-    public PostGetRequest(Integer size, Integer page, String city, String type, Double latitude, Double longitude, String description, Boolean isEditorPick) {
+    public PostGetRequest(Integer size, Integer page, String city, String type, Double latitude, Double longitude, String description, Long tagId, Boolean isEditorPick) {
         this.size = (size == null) || (size < 1) ? 10 : size;
         this.page = (page == null) || (page < 1) ? 1 : page;
         this.city = city == null ? "" : city;
@@ -46,6 +48,7 @@ public record PostGetRequest(
         this.latitude = latitude;
         this.longitude = longitude;
         this.description = description;
+        this.tagId = tagId;
         this.isEditorPick = isEditorPick;
     }
     public Integer offset(){

@@ -38,7 +38,8 @@ public class PostQRepositoryImpl implements PostQRepository{
                         findByCity(postGetRequest.city()),
                         findByType(postGetRequest.type()),
                         post.copyright.eq(true),
-                        findByDescription(postGetRequest.description())
+                        findByDescription(postGetRequest.description()),
+                        findByTagId(postGetRequest.tagId())
                 )
                 .offset(postGetRequest.offset())
                 .limit(postGetRequest.size())
@@ -62,5 +63,13 @@ public class PostQRepositoryImpl implements PostQRepository{
                         .from(postTag).join(postTag.tag, tag)
                         .where(tag.name.contains(description))
                 )) : null;
+    }
+
+    private BooleanExpression findByTagId(Long tagId) {
+        return tagId != null ? post.id.in(
+                select(postTag.post.id)
+                        .from(postTag).join(postTag.tag, tag)
+                        .where(tag.id.eq(tagId))
+        ) : null;
     }
 }
