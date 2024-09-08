@@ -1,4 +1,4 @@
-package com.cw.restory.domain.post.entity;
+package com.cw.restory.domain.tag;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

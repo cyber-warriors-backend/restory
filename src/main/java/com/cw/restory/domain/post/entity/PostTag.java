@@ -1,5 +1,6 @@
 package com.cw.restory.domain.post.entity;
 
+import com.cw.restory.domain.tag.Tag;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

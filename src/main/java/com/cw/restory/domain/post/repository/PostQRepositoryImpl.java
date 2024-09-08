@@ -14,7 +14,7 @@ import java.util.List;
 
 import static com.cw.restory.domain.post.entity.QPost.post;
 import static com.cw.restory.domain.post.entity.QPostTag.postTag;
-import static com.cw.restory.domain.post.entity.QTag.tag;
+import static com.cw.restory.domain.tag.QTag.tag;
 import static com.querydsl.jpa.JPAExpressions.select;
 
 @RequiredArgsConstructor
