@@ -16,7 +16,5 @@ public class Tag {
     @Column(nullable = false, length = 50)
     private String name;
 
-    private Integer recommendOrder;
-
     private Integer searchCnt;
 }
