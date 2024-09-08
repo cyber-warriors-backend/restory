@@ -14,14 +14,17 @@ public class PostImage {
     private Long id;
     private String imageUrl;
     private String description;
+    @Column(length = 4)
+    private String type;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Post post;
 
     @Builder
-    public PostImage(String imageUrl, String description, Post post) {
+    public PostImage(String imageUrl, String description, String type, Post post) {
         this.imageUrl = imageUrl;
         this.description = description;
+        this.type = type;
         this.post = post;
     }
 }
