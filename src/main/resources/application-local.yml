@@ -9,10 +9,6 @@ server:
         secure: false
 
 spring:
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
   datasource:
     url: ${LOCAL_DB_URL}
     username: ${LOCAL_DB_USERNAME}
