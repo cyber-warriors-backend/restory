@@ -118,7 +118,7 @@ public class SecurityConfig {
         JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
 
         if("http://localhost".equals(serverUrl)) {
-            tokenRepository.setCreateTableOnStartup(true); //h2 로컬용
+            tokenRepository.setCreateTableOnStartup(false); //h2 로컬용
         }
         tokenRepository.setDataSource(dataSource);
         return tokenRepository;
