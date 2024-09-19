@@ -15,7 +15,7 @@ public class ArticleImageResponse {
     @Builder
     public ArticleImageResponse(ArticleImage articleImage) {
         this.id = articleImage.getId();
-        this.imageUrl = articleImage.getImageUrl() == null ? "" : IMAGE_URL_PREFIX + articleImage.getImageUrl() ;
+        this.imageUrl = articleImage.getImageUrl() == null ? "" : IMAGE_URL_PREFIX + articleImage.getImageUrl();
         this.description = articleImage.getDescription();
     }
 }

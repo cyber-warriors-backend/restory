@@ -22,13 +22,14 @@ public class ArticleResponse {
     private List<ArticleImageResponse> articleImages;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private static final String IMAGE_URL_PREFIX = "https://img.restory.site/";
 
     @Builder
     public ArticleResponse(Article article) {
         this.id = article.getId();
         this.title = article.getTitle();
         this.content = article.getContent();
-        this.thumbnail = article.getThumbnail();
+        this.thumbnail = article.getThumbnail() == null ? "" : IMAGE_URL_PREFIX + article.getThumbnail();
         this.createdAt = article.getCreatedAt();
         this.updatedAt = article.getUpdatedAt();
         this.articleImages = article.getArticleImages().stream()

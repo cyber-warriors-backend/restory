@@ -1,8 +1,13 @@
 package com.cw.restory.web.article.controller;
 
 import com.cw.restory.service.article.ArticleService;
+import com.cw.restory.web.article.response.ArticleResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,4 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticleController {
 
     private final ArticleService articleService;
+
+    @Operation(summary = "아티클 상세 조회", description = "아티클 키값(ID)으로 아티크르 1개를 조회합니다.")
+    @GetMapping("/{id}")
+    public ResponseEntity<ArticleResponse> getOneArticle(@PathVariable Long id) {
+        return ResponseEntity.ok().body(articleService.getOneArticle(id));
+    }
 }

@@ -2,6 +2,7 @@ package com.cw.restory.domain.article.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,4 +19,11 @@ public class ArticleImage {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Article article;
+
+    @Builder
+    private ArticleImage(String imageUrl, String description, Article article) {
+        this.imageUrl = imageUrl;
+        this.description = description;
+        this.article = article;
+    }
 }
