@@ -5,7 +5,9 @@ import com.cw.restory.domain.post.enums.City;
 import com.cw.restory.domain.post.enums.Type;
 import com.cw.restory.web.post.request.PostGetRequest;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.StringUtils;
@@ -43,6 +45,7 @@ public class PostQRepositoryImpl implements PostQRepository{
                 )
                 .offset(postGetRequest.offset())
                 .limit(postGetRequest.size())
+                .orderBy(orderByDistance(postGetRequest.latitude(), postGetRequest.longitude()))
                 .fetch();
                 //todo 공통 키워드 검색 추가(제목, 서브타입 like) + orderby / if (파라미터 == distance) -> 거리순 정렬 기능 추가
     }
@@ -71,5 +74,15 @@ public class PostQRepositoryImpl implements PostQRepository{
                         .from(postTag).join(postTag.tag, tag)
                         .where(tag.id.eq(tagId))
         ) : null;
+    }
+
+    // Haversine 공식을 사용하여 거리 계산 및 정렬
+    private OrderSpecifier<Double> orderByDistance(Double latitude, Double longitude) {
+        if (latitude != null && longitude != null) {
+            return Expressions.numberTemplate(Double.class,
+                    "6371 * acos(cos(radians({0})) * cos(radians({1})) * cos(radians({2}) - radians({3})) + sin(radians({0})) * sin(radians({1})))",
+                    latitude, post.latitude, post.longitude, longitude).asc();
+        }
+        return null;
     }
 }
