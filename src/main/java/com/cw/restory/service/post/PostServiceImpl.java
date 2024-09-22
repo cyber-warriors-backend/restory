@@ -23,6 +23,7 @@ public class PostServiceImpl implements PostService{
         List<PostResponse> list = postRepository.findAllByFilters(postRequest).stream()
                 .map(p -> PostResponse.builder()
                         .post(p)
+                        .distance(calculateDistance(postRequest.latitude(), postRequest.longitude(), p.getLatitude(), p.getLongitude()))
                         .build())
                 .toList();
 
@@ -39,6 +40,29 @@ public class PostServiceImpl implements PostService{
         return PostResponse.builder()
                 .post(post)
                 .build();
+    }
+
+    private String calculateDistance(Double lat1, Double lon1, Double lat2, Double lon2) {
+        if (lat1 == null || lon1 == null || lat2 == null || lon2 == null) {
+            return "";
+        }
+
+        final int R = 6371; // 지구의 반지름 (킬로미터)
+        double latDistance = Math.toRadians(lat2 - lat1);
+        double lonDistance = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2) +
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                        Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return formatDistance(R * c); // 킬로미터
+    }
+
+    private String formatDistance(double distanceInKm) {
+        if (distanceInKm >= 1) {
+            return String.valueOf(Math.round(distanceInKm)) + "km";
+        }
+        return String.valueOf(Math.round(distanceInKm * 1000)) + "m";
+
     }
 
 }
