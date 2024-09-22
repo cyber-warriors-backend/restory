@@ -41,13 +41,18 @@ public class PostQRepositoryImpl implements PostQRepository{
                         findByType(postGetRequest.type()),
                         post.copyright.eq(true),
                         findByDescription(postGetRequest.description()),
-                        findByTagId(postGetRequest.tagId())
+                        findByTagId(postGetRequest.tagId()),
+                        findByIsEditorPick(postGetRequest.isEditorPick())
                 )
                 .offset(postGetRequest.offset())
                 .limit(postGetRequest.size())
                 .orderBy(orderByDistance(postGetRequest.latitude(), postGetRequest.longitude()))
                 .fetch();
                 //todo 공통 키워드 검색 추가(제목, 서브타입 like) + orderby / if (파라미터 == distance) -> 거리순 정렬 기능 추가
+    }
+
+    private BooleanExpression findByIsEditorPick(Boolean isEditorPick) {
+        return isEditorPick ? post.isEditorPick.eq(true) : null;
     }
 
     private BooleanExpression findByCity(String city) {
