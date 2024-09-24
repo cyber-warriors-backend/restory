@@ -17,7 +17,10 @@ public class ArticleQRepositoryImpl implements ArticleQRepository{
 
     @Override
     public List<Article> findAllArticleWithImage() {
-        return List.of();
+        return jpaQueryFactory.selectFrom(article)
+                .leftJoin(article.articleImages)
+                .fetchJoin()
+                .fetch();
     }
 
     @Override

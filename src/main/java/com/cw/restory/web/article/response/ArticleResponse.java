@@ -18,7 +18,6 @@ public class ArticleResponse {
     private Long id;
     private String title;
     private String content;
-    private String thumbnail;
     private List<ArticleImageResponse> articleImages;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -29,7 +28,6 @@ public class ArticleResponse {
         this.id = article.getId();
         this.title = article.getTitle();
         this.content = article.getContent();
-        this.thumbnail = article.getThumbnail() == null ? "" : IMAGE_URL_PREFIX + article.getThumbnail();
         this.createdAt = article.getCreatedAt();
         this.updatedAt = article.getUpdatedAt();
         this.articleImages = article.getArticleImages().stream()

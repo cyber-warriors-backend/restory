@@ -42,7 +42,6 @@ class ArticleServiceImplTest {
         Article article = Article.builder()
                 .title("아티클 제목")
                 .content("아티클 내용")
-                .thumbnail("아티클 썸네일 주소")
                 .build();
 
         articleRepository.save(article);

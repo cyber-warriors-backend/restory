@@ -10,6 +10,7 @@ public class ArticleImageResponse {
     private Long id;
     private String imageUrl;
     private String description;
+    private String type;
     private static final String IMAGE_URL_PREFIX = "https://img.restory.site/";
 
     @Builder
@@ -17,5 +18,6 @@ public class ArticleImageResponse {
         this.id = articleImage.getId();
         this.imageUrl = articleImage.getImageUrl() == null ? "" : IMAGE_URL_PREFIX + articleImage.getImageUrl();
         this.description = articleImage.getDescription();
+        this.type = articleImage.getType();
     }
 }
