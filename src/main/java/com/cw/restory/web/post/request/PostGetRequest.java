@@ -49,7 +49,7 @@ public record PostGetRequest(
         this.longitude = longitude;
         this.description = description;
         this.tagId = tagId;
-        this.isEditorPick = isEditorPick;
+        this.isEditorPick = isEditorPick == null ? false : isEditorPick;
     }
     public Integer offset(){
         return (this.page - 1) * size;

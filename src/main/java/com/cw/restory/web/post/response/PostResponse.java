@@ -25,8 +25,9 @@ public class PostResponse{
     private final String holiday;
     private final String url;
     private final List<PostImageResponse> postImages;
+    private final String distance;
     @Builder
-    public PostResponse(Post post) {
+    public PostResponse(Post post, String distance) {
         this.id = post.getId();
         this.title = post.getTitle();
         this.type = post.getType().getDescription();
@@ -47,6 +48,7 @@ public class PostResponse{
                         .postImage(p)
                         .build())
                 .toList();
+        this.distance = distance == null ? "" : distance;
     }
 }
 
