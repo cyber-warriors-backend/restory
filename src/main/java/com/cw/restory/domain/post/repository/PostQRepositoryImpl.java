@@ -82,12 +82,12 @@ public class PostQRepositoryImpl implements PostQRepository{
     }
 
     // Haversine 공식을 사용하여 거리 계산 및 정렬
-    private OrderSpecifier<Double> orderByDistance(Double latitude, Double longitude) {
+    private OrderSpecifier<? extends Number> orderByDistance(Double latitude, Double longitude) {
         if (latitude != null && longitude != null) {
             return Expressions.numberTemplate(Double.class,
                     "6371 * acos(cos(radians({0})) * cos(radians({1})) * cos(radians({2}) - radians({3})) + sin(radians({0})) * sin(radians({1})))",
                     latitude, post.latitude, post.longitude, longitude).asc();
         }
-        return null;
+        return post.id.asc();
     }
 }
