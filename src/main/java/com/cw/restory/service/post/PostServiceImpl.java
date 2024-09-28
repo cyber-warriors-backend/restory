@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Service
@@ -58,8 +59,10 @@ public class PostServiceImpl implements PostService{
     }
 
     private String formatDistance(double distanceInKm) {
+        DecimalFormat df = new DecimalFormat("0.#"); // 소수점 첫째 자리까지만 표시, .0일 때는 생략
+
         if (distanceInKm >= 1) {
-            return String.valueOf(Math.round(distanceInKm)) + "km";
+            return df.format(distanceInKm) + "km";
         }
         return String.valueOf(Math.round(distanceInKm * 1000)) + "m";
 

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public enum City {
+    ALL("전국"),
     GANGWON("강원"),
     GYEONGGI("경기"),
     GYEONGNAM("경남"),
