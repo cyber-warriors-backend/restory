@@ -44,6 +44,8 @@ public class PostSearchFilterController {
                 .map(e -> {
                     Long cnt = cityCountMap.getOrDefault(e.name(), 0L);
 
+                    if(e == City.ALL) cnt = postRepository.count();
+
                     return PostSearchFilterResponse.builder()
                             .code(e.name())
                             .description(e.getDescription())

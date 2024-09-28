@@ -43,7 +43,7 @@ public record PostGetRequest(
     public PostGetRequest(Integer size, Integer page, String city, String type, Double latitude, Double longitude, String description, Long tagId, Boolean isEditorPick) {
         this.size = (size == null) || (size < 1) ? 10 : size;
         this.page = (page == null) || (page < 1) ? 1 : page;
-        this.city = city == null ? "" : city;
+        this.city = (city == null) || "ALL".equals(city) ? "" : city;
         this.type = type == null ? "" : type;
         this.latitude = latitude;
         this.longitude = longitude;
