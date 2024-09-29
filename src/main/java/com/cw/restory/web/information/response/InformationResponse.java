@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 public class InformationResponse {
@@ -15,9 +16,9 @@ public class InformationResponse {
 
     private String content;
 
-    private LocalDateTime createdAt;
+    private String createdAt;
 
-    private LocalDateTime updatedAt;
+    private String updatedAt;
 
     private String createdBy;
 
@@ -28,9 +29,11 @@ public class InformationResponse {
         this.id = information.getId();
         this.title = information.getTitle();
         this.content = information.getContent();
-        this.createdAt = information.getCreatedAt();
-        this.updatedAt = information.getUpdatedAt();
+        this.createdAt = information.getCreatedAt().format(formatter);
+        this.updatedAt = information.getUpdatedAt().format(formatter);
         this.createdBy = information.getCreatedBy();
         this.updatedBy = information.getUpdatedBy();
     }
+
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy.MM.dd");
 }
