@@ -27,4 +27,8 @@ public class PostImage {
         this.type = type;
         this.post = post;
     }
+
+    public void updateDescription(String imageUrl){
+        this.imageUrl = imageUrl;
+    }
 }
