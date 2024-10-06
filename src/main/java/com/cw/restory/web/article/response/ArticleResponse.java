@@ -1,11 +1,6 @@
 package com.cw.restory.web.article.response;
 
 import com.cw.restory.domain.article.entity.Article;
-import com.cw.restory.domain.article.entity.ArticleImage;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -21,7 +16,6 @@ public class ArticleResponse {
     private List<ArticleImageResponse> articleImages;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private static final String IMAGE_URL_PREFIX = "https://img.restory.site/";
 
     @Builder
     public ArticleResponse(Article article) {
