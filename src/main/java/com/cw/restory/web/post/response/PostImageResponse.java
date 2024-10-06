@@ -10,7 +10,7 @@ public class PostImageResponse {
     private final String imageUrl;
     private final String description;
     private final String type;
-    private static final String IMAGE_URL_PREFIX = "https://img.restory.site/";
+    private static final String IMAGE_URL_PREFIX = "https://img.restory.site/posts/";
     @Builder
     public PostImageResponse(PostImage postImage) {
         this.id = postImage.getId();

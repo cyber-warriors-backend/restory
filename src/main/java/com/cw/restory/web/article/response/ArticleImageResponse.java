@@ -1,7 +1,6 @@
 package com.cw.restory.web.article.response;
 
 import com.cw.restory.domain.article.entity.ArticleImage;
-import com.cw.restory.domain.post.entity.PostImage;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,7 +10,7 @@ public class ArticleImageResponse {
     private String imageUrl;
     private String description;
     private String type;
-    private static final String IMAGE_URL_PREFIX = "https://img.restory.site/";
+    private static final String IMAGE_URL_PREFIX = "https://img.restory.site/articles/";
 
     @Builder
     public ArticleImageResponse(ArticleImage articleImage) {
