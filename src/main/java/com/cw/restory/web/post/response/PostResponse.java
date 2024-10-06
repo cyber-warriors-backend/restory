@@ -12,10 +12,12 @@ public class PostResponse{
     private final Long id;
     private final String title;
     private final String type;
+    private final String typeDesc;
     private final String summary;
     private final String content;
     private final String subContent;
     private final String city;
+    private final String cityDesc;
     private final String address;
     private final Double latitude;
     private final Double longitude;
@@ -30,11 +32,13 @@ public class PostResponse{
     public PostResponse(Post post, String distance) {
         this.id = post.getId();
         this.title = post.getTitle();
-        this.type = post.getType().getDescription();
+        this.type = post.getType().name();
+        this.typeDesc = post.getType().getDescription();
         this.summary = post.getSummary();
         this.content = post.getContent();
         this.subContent = post.getSubContent();
-        this.city = post.getCity().getDescription();
+        this.city = post.getCity().name();
+        this.cityDesc = post.getCity().getDescription();
         this.address = post.getAddress();
         this.latitude = post.getLatitude();
         this.longitude = post.getLongitude();
